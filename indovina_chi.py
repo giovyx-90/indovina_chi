@@ -141,7 +141,7 @@ def gioca():
                 print("\nMi dispiace, non è corretto.")
                 punteggio -= 20  # Sottrai 20 punti per un tentativo errato
                 domande_rimanenti -= 1
-            print(f"Punteggio attuale: {punteggio}")  # Mostra il punteggio dopo ogni azione
+                print(f"Punteggio attuale: {punteggio}")  # Mostra il punteggio dopo ogni azione
             print(f"Domande rimanenti: {domande_rimanenti}")
 
 
