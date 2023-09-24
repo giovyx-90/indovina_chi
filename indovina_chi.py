@@ -13,6 +13,19 @@ giulia= {"nome": "Giulia","genere": "femmina",  "colore_occhi": "verdi", "tipo_c
 hugo = {"nome": "Hugo", "genere": "maschio", "colore_occhi": "marroni", "tipo_capelli": "mossi", "colore_capelli": "grigi", "occhiali": True, "barba/baffi": False, "lentiggini": False}
 irene = {"nome": "Irene", "genere": "femmina", "colore_occhi": "azzurri", "tipo_capelli": "lisci", "colore_capelli": "rossi", "occhiali": False, "barba/baffi": False, "lentiggini": False}
 luca = {"nome": "Luca","genere": "maschio", "colore_occhi": "grigi", "tipo_capelli": "biondi", "colore_capelli": "biondi", "occhiali": False, "barba/baffi": True, "lentiggini": False}
+marco = {"nome": "Marco", "genere": "maschio", "colore_occhi": "azzurri", "tipo_capelli": "lisci", "colore_capelli": "biondi", "occhiali": True, "barba/baffi": False, "lentiggini": False}
+lucia = {"nome": "Lucia", "genere": "femmina", "colore_occhi": "verdi", "tipo_capelli": "ricci", "colore_capelli": "castani", "occhiali": False, "barba/baffi": False, "lentiggini": True}
+michele = {"nome": "Michele", "genere": "maschio", "colore_occhi": "grigi", "tipo_capelli": "mossi", "colore_capelli": "rossi", "occhiali": False, "barba/baffi": True, "lentiggini": False}
+rosa = {"nome": "Rosa", "genere": "femmina", "colore_occhi": "marroni", "tipo_capelli": "lisci", "colore_capelli": "neri", "occhiali": True, "barba/baffi": False, "lentiggini": False}
+matteo = {"nome": "Matteo", "genere": "maschio", "colore_occhi": "azzurri", "tipo_capelli": "calvo", "colore_capelli": "biondi", "occhiali": False, "barba/baffi": False, "lentiggini": True}
+francesca = {"nome": "Francesca", "genere": "femmina", "colore_occhi": "grigi", "tipo_capelli": "mossi", "colore_capelli": "biondi", "occhiali": True, "barba/baffi": False, "lentiggini": False}
+leo = {"nome": "Leo", "genere": "maschio", "colore_occhi": "marroni", "tipo_capelli": "ricci", "colore_capelli": "neri", "occhiali": False, "barba/baffi": True, "lentiggini": False}
+gianluca = {"nome": "Gianluca", "genere": "maschio", "colore_occhi": "grigi", "tipo_capelli": "lisci", "colore_capelli": "grigi", "occhiali": True, "barba/baffi": False, "lentiggini": False}
+sonia = {"nome": "Sonia", "genere": "femmina", "colore_occhi": "azzurri", "tipo_capelli": "ricci", "colore_capelli": "castani", "occhiali": True, "barba/baffi": False, "lentiggini": False}
+
+lista_personaggi = [anna, bruno, carla, davide, elena, fabio, giulia, hugo, irene, luca, marco, lucia, rosa, matteo, francesca, leo, gianluca, sonia]
+
+# Re-definisco pesi_domande
 
 pesi_domande = {
     "genere": 15,
@@ -24,7 +37,62 @@ pesi_domande = {
     "lentiggini": 5
 }
 
-lista_personaggi = [anna, bruno, carla, davide, elena, fabio, giulia, hugo, irene, luca]
+# Dizionari per le difficoltà
+
+difficoltà = {
+    "casual": {
+        "domande": 7,
+        "punteggio_iniziale": 80,
+        "pesi_domande": {
+            "genere": 10,
+            "colore_occhi": 7,
+            "tipo_capelli": 6,
+            "colore_capelli": 6,
+            "occhiali": 4,
+            "barba/baffi": 4,
+            "lentiggini": 4
+        },
+        "numero_personaggi": 20
+    },
+    "normale": {
+        "domande": 6,
+        "punteggio_iniziale": 60,
+        "pesi_domande": pesi_domande,  # Utilizza il peso delle domande già definito
+        "numero_personaggi": 30
+    },
+    "difficile": {
+        "domande": 5,
+        "punteggio_iniziale": 60,
+        "pesi_domande": {
+            "genere": 20,
+            "colore_occhi": 15,
+            "tipo_capelli": 12,
+            "colore_capelli": 10,
+            "occhiali": 8,
+            "barba/baffi": 8,
+            "lentiggini": 8
+        },
+        "numero_personaggi": 30
+    },
+    "detective": {
+        "domande": 5,
+        "punteggio_iniziale": 50,
+        "pesi_domande": {
+            "genere": 25,
+            "colore_occhi": 20,
+            "tipo_capelli": 15,
+            "colore_capelli": 12,
+            "occhiali": 10,
+            "barba/baffi": 10,
+            "lentiggini": 10
+        },
+        "numero_personaggi": 30
+    }
+}
+
+difficoltà
+
+
 
 # Sceglie un personaggio del gioco
 personaggi_compatibili = lista_personaggi.copy()
@@ -45,15 +113,15 @@ def aggiorna_personaggi_compatibili(domanda,risposta):
     
     
 
-def messaggio_di_benvenuto():
-    print("""
+def messaggio_di_benvenuto(numero_domande):
+    print(f"""
 🎉 **Benvenuto a INDOVINA CHI - Python Edition!** 🎉
 
 In questo gioco, devi indovinare il personaggio misterioso che ho scelto tra una lista di candidati. Ogni personaggio ha diverse caratteristiche, come il colore degli occhi, il tipo di capelli e altro ancora.
 
 Ecco come funziona:
 1. All'inizio di ogni turno, sceglierò un personaggio misterioso.
-2. Avrai un totale di 6 domande per cercare di indovinare chi sia questo personaggio basandoti sulle sue caratteristiche.
+2. Avrai un totale di {numero_domande} domande per cercare di indovinare chi sia questo personaggio basandoti sulle sue caratteristiche.
 3. Puoi fare domande come "Ha gli occhiali?" o "Ha i capelli ricci?" e io risponderò con "sì" o "no".
 4. Dopo ogni domanda, ti mostrerò i personaggi che rimangono compatibili con le tue domande.
 5. Se pensi di sapere chi sia il personaggio misterioso prima di esaurire le tue domande, puoi fare un tentativo dicendo "indovina" e poi inserendo il nome del personaggio.
@@ -92,7 +160,7 @@ def verifica_domanda(domanda, personaggio):
     for colore in ["azzurri", "verdi", "marroni", "grigi"]:
         if colore in domanda:
             caratteristica = "colore_occhi"
-            return "sì" if personaggio["colore_occhi"] == colore else "no"
+            risposta = "sì" if personaggio["colore_occhi"] == colore else "no"
     
     # Verifica per il tipo di capelli
     for tipo in ["ricci", "lisci", "mossi", "calvo"]:
@@ -123,11 +191,12 @@ def verifica_domanda(domanda, personaggio):
     
     return risposta, caratteristica
 
-def gioca():
+def gioca(difficoltà, personaggi_selezionati):
     continua_gioco = True
-    domande_rimanenti = 6
-    punteggio = 50  # Inizializza il punteggio a 50
-    messaggio_di_benvenuto()   
+    domande_rimanenti = difficoltà["domande"]
+    punteggio = difficoltà["punteggio_iniziale"]  
+    messaggio_di_benvenuto(domande_rimanenti) 
+
     while continua_gioco:
         domanda = input("""
         \nFai la tua domanda (o scrivi 'indovina' per tentare una risposta): digita 'lista_personaggi' per la lista totale dei personaggi e le loro caratteristiche. """).lower()
@@ -135,14 +204,14 @@ def gioca():
         if "indovina" in domanda:
             risposta = input("\nChi pensi sia il personaggio misterioso? (scrivi solo il nome): ").lower()
             if risposta == personaggio_scelto["nome"].lower():
-                print(f"\nComplimenti! Hai indovinato! Il tuo punteggio finale è: {punteggio}")
+                print(f"\nComplimenti! Hai indovinato! Il tuo punteggio finale è: {punteggio} in difficoltà {scelta_difficoltà}.")
                 continua_gioco = False
             else:
-                print("\nMi dispiace, non è corretto.")
+                print(f"\nMi dispiace, ma {risposta} non è corretto.")
                 punteggio -= 20  # Sottrai 20 punti per un tentativo errato
                 domande_rimanenti -= 1
                 print(f"Punteggio attuale: {punteggio}")  # Mostra il punteggio dopo ogni azione
-            print(f"Domande rimanenti: {domande_rimanenti}")
+                print(f"Domande rimanenti: {domande_rimanenti}")
 
 
         elif 'lista_personaggi' in domanda:
@@ -152,10 +221,10 @@ def gioca():
             risposta, caratteristica = verifica_domanda(domanda, personaggio_scelto)
             if risposta == "non so":
                 print("\nNon ho capito la tua domanda. Riprova.")
-            elif caratteristica in pesi_domande:
+            elif caratteristica in difficoltà['pesi_domande']:
                 aggiorna_personaggi_compatibili(domanda, risposta)
                 print("\n" + risposta.capitalize() + ".")
-                punteggio -= pesi_domande[caratteristica]
+                punteggio -= difficoltà['pesi_domande'][caratteristica]
                 domande_rimanenti -= 1
             
 
@@ -168,24 +237,47 @@ def gioca():
             continua_gioco = False
         
         if punteggio <= 0:
-            print("Non puoi avere punteggio negativo, quindi il gioco è finito.")
+            print(f"Non puoi avere punteggio negativo, quindi il gioco è finito. Il personaggio misterioso era {personaggio_scelto['nome']}.")
             continua_gioco = False
         
 
         
 
 # Il gioco intero
+try:
+    while True:
+        scelta = input("""
+        \nINDOVINA CHI --- Python Edition [Creato da Giovyx90]
+        Premi 'INVIO' per giocare o digita 'esci' per uscire: """)
 
-while True:
-    scelta = input("""
-    \nINDOVINA CHI --- python edition [Creato da Giovyx90]
-    Premi 'INVIO' per giocare o digita 'esci' per uscire: """)
+        if scelta == "":  # Se l'utente ha premuto solo INVIO
+            print("""
+            Scegli una difficoltà:
+            - Casual: 7 domande, 50 punti, 20 personaggi su 30, meno penalità per domanda.
+            - Normale: 6 domande, 50 punti, tutti i personaggi.
+            - Difficile: 5 domande, 50 punti, tutti i personaggi con più penalità per domanda.
+            - Detective: 5 domande, 40 punti, tutti i personaggi con ancora più penalità per domanda.
+            """)
+            
+            
+            scelta_difficoltà = input("Seleziona la difficoltà (casual, normale, difficile, detective): ").lower()   
+            if scelta_difficoltà not in difficoltà:
+                print("Scelta non valida. Riprova.")
+                
+                continue
+                
+            # Seleziona un sottoinsieme di personaggi se necessario
+            if difficoltà[scelta_difficoltà]["numero_personaggi"] < len(lista_personaggi):
+                personaggi_selezionati = random.sample(lista_personaggi, difficoltà[scelta_difficoltà]["numero_personaggi"])
+            else:
+                personaggi_selezionati = lista_personaggi
 
-    if scelta == "":  # Se l'utente ha premuto solo INVIO
-        gioca()
-    elif scelta == "esci":
-        print("Grazie per aver giocato! Alla prossima!")
-        break
-    else:
-        print("Scelta non valida. Riprova.")
-
+            gioca(difficoltà[scelta_difficoltà], personaggi_selezionati) 
+        elif scelta == "esci":
+            print("Grazie per aver giocato! Alla prossima!")
+            break
+        else: 
+            print("Scelta non valida. Riprova.")
+except KeyboardInterrupt:
+        print("\nHai premuto CTRL+C. Uscita forzata dal gioco.")
+    
