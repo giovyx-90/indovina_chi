@@ -8,7 +8,7 @@ In questo gioco, l'obiettivo è indovinare il personaggio misterioso scelto dall
 
 ## Funzionalità
 
-- Una lista di 10 personaggi con diverse caratteristiche.
+- Una lista di 20 personaggi con diverse caratteristiche.
 - La possibilità di fare domande sulle caratteristiche per restringere le opzioni.
 - Un sistema di punteggio basato sul numero e sulla tipologia di domande fatte.
 - Una interfaccia utente interattiva e amichevole.
